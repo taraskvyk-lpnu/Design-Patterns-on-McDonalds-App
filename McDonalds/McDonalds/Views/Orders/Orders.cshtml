@@ -1,0 +1,42 @@
+﻿@model (List<Domain.Entites.Burger>, List<Domain.Entites.Drink>)
+<div class="row m-4">
+    <div class="col-md-6 text-center">
+            @await Html.PartialAsync("_IndexPartial")
+        </div>
+    <div class="col-md-6 text-center">
+    </div>
+    <div class="col-md-12 text-center">
+        @ViewBag.Difficulty
+        <a asp-action="CreateOrders" asp-route-difficulty="@ViewBag.Difficulty" class="btn btn-primary">Generate Order</a>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Burger Orders</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    @foreach (var burgerOrder in Model.Item1)
+                    {
+                        <li class="list-group-item">@burgerOrder.Name</li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Drink Orders</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    @foreach (var drinkOrder in Model.Item2)
+                    {
+                        <li class="list-group-item">@drinkOrder.Name</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@using Domain.Entites
+@using McDonalds.MenuDecorators
+@model McDonalds.Views.MenuModel
+@{
+    ViewData["Title"] = "Menu Page";
+}
+
+<form method="post">
+    <select name="categories[]" multiple>
+        <option value="burgers">Burgers</option>
+        <option value="drinks">Drinks</option>
+        <option value="sidedishes">Side Dishes</option>
+    </select>
+    <button type="submit" name="submit">Show Menu</button>
+</form>
+
+
+@if (Model.ShowMenu)
+{
+    <h2>Menu:</h2>
+    <ul>
+        @foreach (var product in Model.Products)
+        {
+            <li>@product.Name - $@product.Price</li>
+        }
+    </ul>
+}

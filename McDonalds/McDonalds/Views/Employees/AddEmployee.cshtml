@@ -1,0 +1,33 @@
+﻿@model McDonalds.EmployeeFacade.Employee
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add employee</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Add employee</h1>
+        <form method="post" asp-action="AddEmployee">
+            <div class="form-group">
+                <label for="fullName">FullName:</label>
+                <input type="text" class="form-control" id="fullName" name="FullName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="Email" required>
+            </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                @{
+                    var enumSelectList = new SelectList(Enum.GetValues(typeof(EmployeeRole)));
+                }
+                <select asp-for="Role" asp-items="enumSelectList" class="form-control"></select>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</body>
+</html>

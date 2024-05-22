@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Domain.Order>
+<div class="row m-4">
+    <div class="col-md-12 m-3 text-center">
+            @await Html.PartialAsync("_IndexPartial")
+    </div>
+    <div class="col-md-12 text-center">
+        @ViewBag.Difficulty
+        <a asp-action="CreateOrders" asp-route-difficulty="@ViewBag.Difficulty" class="btn btn-primary">Generate Order</a>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        @foreach (var order in Model)
+        {
+            <div class="col-md-4">
+                <div class="card m-2">
+                    <div class="card-header">
+                        Order # @order.OrderNumber
+                    </div>
+                    <div class="card-body">
+                        @{
+                            var burgersPrice = order.Burgers.Sum(b => b.Price);
+                            var drinksPrice = order.Drinks.Sum(d => d.Price);
+                        }
+                        <h5 class="card-title">Burgers : @burgersPrice.ToString("c")</h5>
+                        <ul class="list-group">
+                            @foreach (var burger in order.Burgers)
+                            {
+                                <li class="list-group-item">@burger.Name</li>
+                            }
+                        </ul>
+                        <h5 class="card-title mt-3">Drinks : @drinksPrice.ToString("c")</h5>
+                        <ul class="list-group">
+                            @foreach (var drink in order.Drinks)
+                            {
+                                <li class="list-group-item">@drink.Name</li>
+                            }
+                        </ul>
+                        <p class="card-text mt-3">@order.Description</p>
+                        <h5 class="card-title mt-3">Total : @((drinksPrice + burgersPrice).ToString("c"))</h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

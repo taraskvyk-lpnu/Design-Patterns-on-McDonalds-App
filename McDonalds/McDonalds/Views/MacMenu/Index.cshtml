@@ -1,0 +1,44 @@
+﻿@using System.Reflection
+@using System.Text.RegularExpressions
+@using McDonalds.MacMenuBuilder
+@model List<McDonalds.MacMenuBuilder.MacMenuBuilder>
+@{
+    <div class="row">
+        @foreach (var menuBuilder in Model)
+        {
+            menuBuilder.BuildBurger();
+            menuBuilder.BuildDrink();
+            menuBuilder.BuildSideDish();
+            var menu = menuBuilder.GetMacMenu();
+    
+            {
+                // Отримуємо повне ім'я класу будівельника
+                string fullClassName = menuBuilder.GetType().Name;
+
+                // Видаляємо префікс перед ім'ям меню за допомогою регулярного виразу
+                string menuName = Regex.Replace(fullClassName, "([a-z]+)Builder", "$1");
+                menuName = Regex.Replace(menuName, "([a-z]Mac)([A-Z])", "$1 $2");
+                <h2>@menuName</h2>
+            }
+
+                
+            foreach (var product in menu)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="@product.ImageUrl" class="card-img-top" alt="Product Image">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="addToCart('@product.Id')">Add to Cart</button>
+                                </div>
+                                <small class="text-muted">@product.Price.ToString("c")</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            }
+        }
+    </div>
+}

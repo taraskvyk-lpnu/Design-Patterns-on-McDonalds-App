@@ -1,0 +1,103 @@
+﻿@page
+@using Domain.Entites
+@model McDonalds.Views.Home.IndexModel
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Product List";
+    ViewBag.NotificationType = "Warning";
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.NotificationMessage))
+{
+    <div class="notification-banner @(ViewBag.NotificationType)">
+        <p>@Html.Raw(ViewBag.NotificationMessage)</p>
+    </div>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+           <form method="post">
+               <aside>
+                   <h4>Categories</h4>
+                   <ul class="list-group">
+                       @foreach (var category in Model.Categories)
+                       {
+                           <li class="list-group-item">
+                               <label class="form-check-label m-2">
+                                   <input type="checkbox" name="categoryIds" value="@category.Id" class="form-check-input"
+                                          @(Model.CurrentCategoryIds.Contains(category.Id.ToString()) ? "checked" : "")
+                                          >@category.Name
+                               </label>
+                           </li>
+                       }
+                   </ul>
+               </aside>
+               <button type="submit" class="btn btn-primary mt-3">Show Menu</button>
+           </form>
+        </div>
+        <div class="col-md-9">
+            <h2>Product List</h2>
+            <div class="d-flex justify-content-end">
+                <div class="dropdown mb-2"> 
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="perPageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Per Page: @Model.ItemsPerPage
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="perPageDropdown" id="perPageDropdownMenu">
+                        <a class="dropdown-item" href="#" data-per-page="1" >1</a>
+                        <a class="dropdown-item" href="#" data-per-page="2" >2</a>
+                        <a class="dropdown-item" href="#" data-per-page="5" >5</a>
+                        <a class="dropdown-item" href="#" data-per-page="10">10</a>
+                        <a class="dropdown-item" href="#" data-per-page="20">20</a>
+                    </div>
+                </div>
+                 <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Currency : @HttpContextAccessor.HttpContext.Session.GetString("Currency")
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/Home/ChangeCurrency?currency=USD">USD</a>
+                        <a class="dropdown-item" href="/Home/ChangeCurrency?currency=Euro">Euro</a>
+                        <a class="dropdown-item" href="/Home/ChangeCurrency?currency=GRN">GRN</a>
+                        <a class="dropdown-item" href="/Home/ChangeCurrency?currency=Pounds">Pounds</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var product in Model.PaginatedProducts.GetProducts())
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="@product.ImageUrl" class="card-img-top" alt="Product Image">
+                            <div class="card-body">
+                                <h5 class="card-title">@product.Name</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
+                                    </div>
+                                    <small class="text-muted">@product.Price.ToString("c")</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    @for (int i = 1; i <= (Model.PaginatedProducts.Products.Count / Model.ItemsPerPage) + 1; i++)
+                    {
+                        <li class="page-item @(Model.Page == i ? "active" : "")">
+                            <a class="page-link" asp-page="./Index" asp-route-Page="@i">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

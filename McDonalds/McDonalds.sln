@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McDonalds", "McDonalds\McDonalds.csproj", "{2F36E4CA-6BB4-4734-8FE8-03B901CE0F20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{872D18DB-2185-4C4C-823D-59CEE188FB50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{BFC92952-3862-42E9-98D6-9E42FC75CFE0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F36E4CA-6BB4-4734-8FE8-03B901CE0F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F36E4CA-6BB4-4734-8FE8-03B901CE0F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F36E4CA-6BB4-4734-8FE8-03B901CE0F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F36E4CA-6BB4-4734-8FE8-03B901CE0F20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{872D18DB-2185-4C4C-823D-59CEE188FB50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{872D18DB-2185-4C4C-823D-59CEE188FB50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{872D18DB-2185-4C4C-823D-59CEE188FB50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{872D18DB-2185-4C4C-823D-59CEE188FB50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFC92952-3862-42E9-98D6-9E42FC75CFE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC92952-3862-42E9-98D6-9E42FC75CFE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC92952-3862-42E9-98D6-9E42FC75CFE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC92952-3862-42E9-98D6-9E42FC75CFE0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
